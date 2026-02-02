@@ -34,11 +34,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return () => subscription.unsubscribe();
     }, []);
 
+    const getURL = () => {
+        let url =
+            import.meta.env.VITE_SITE_URL ??
+            window?.location?.origin ??
+            'http://localhost:3000';
+
+        // Ensure URL has a trailing slash
+        url = url.endsWith('/') ? url : `${url}/`;
+        return url;
+    };
+
     const signInWithGoogle = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin,
+                redirectTo: getURL(),
             },
         });
         if (error) {
