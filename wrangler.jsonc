@@ -1,5 +1,5 @@
 {
-    "name": "worker-name",
+    "name": "financialapp",
     "compatibility_date": "2026-02-02",
     "assets": {
         "directory": "./dist"
