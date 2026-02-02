@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TransactionTableProps } from '../types/transaction.types';
-import { getTypeStyles, getTypeText, downloadProof } from '../helpers/transaction.helper';
+import { getTypeStyles, getTypeText } from '../helpers/transaction.helper';
 
 const TransactionTable = ({ transactions, onToggleStatus, onDelete, onUploadProof }: TransactionTableProps) => {
 
@@ -50,8 +50,8 @@ const TransactionTable = ({ transactions, onToggleStatus, onDelete, onUploadProo
         accept="image/*"
         className="hidden"
       />
-      <div className="overflow-x-visible"> {/* overflow-visible needed for dropdown */}
-        <table className="w-full text-left border-collapse">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[700px]">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
               <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Descripción</th>
@@ -74,7 +74,7 @@ const TransactionTable = ({ transactions, onToggleStatus, onDelete, onUploadProo
                 <tr key={t.id} className="hover:bg-slate-50/50 transition-colors relative">
                   <td className="px-6 py-4">
                     <div className="font-medium text-slate-900">{t.description}</div>
-                    <div className="text-xs text-slate-400">{t.category}</div>
+                    <div className="text-xs text-slate-400 hidden sm:block">{t.category}</div>
                   </td>
                   <td className="px-6 py-4 font-semibold text-slate-700">
                     ${t.amount.toLocaleString()}
